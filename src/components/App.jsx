@@ -70,7 +70,7 @@ class App extends Component {
       <>
         <Searchbar onSubmit={this.onSearch} />
         <ImageGallery images={images} />
-        {images.length > 0 && endOfSearch && (
+        {images.length > 0 && !endOfSearch && (
           <Button loadMore={this.fetchData} />
         )}
         {isLoading && <Loader />}
