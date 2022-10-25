@@ -80,7 +80,3 @@ class App extends Component {
 }
 
 export default App;
-
-function deleteNth(arr, n) {
-  // your code
-}
