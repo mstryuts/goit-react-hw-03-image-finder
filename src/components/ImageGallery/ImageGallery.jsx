@@ -2,11 +2,11 @@ import css from '../ImageGallery/ImageGallery.module.css';
 
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, onClick }) => {
   return (
     <>
       <ul className={css.gallery}>
-        <ImageGalleryItem images={images} />
+        <ImageGalleryItem images={images} onClick={onClick} />
       </ul>
     </>
   );

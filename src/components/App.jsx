@@ -1,10 +1,13 @@
 import { Component } from 'react';
+import css from './App.module.css';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import fetchImages from './Api';
 import Loader from './Loader/Loader';
+
+import Modal from './Modal/Modal';
 
 class App extends Component {
   state = {
@@ -14,13 +17,14 @@ class App extends Component {
     endOfSearch: false,
     isLoading: false,
     error: null,
+    largeImg: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { searchImgValue, page } = this.state;
 
     if (prevState.searchImgValue !== searchImgValue) {
-      this.fetchData(searchImgValue, page);
+      this.fetchData();
     }
   }
 
@@ -52,29 +56,49 @@ class App extends Component {
   };
 
   onSearch = searchValue => {
-    console.log(searchValue);
-
     if (searchValue !== this.state.searchImgValue) {
       this.setState({
         searchImgValue: searchValue,
         images: [],
         page: 1,
+        endOfSearch: false,
       });
     }
   };
+  toggleModal = () => {
+    this.setState({ largeImg: '' });
+  };
+
+  getLargeImg = url => {
+    this.setState({
+      largeImg: url,
+    });
+  };
 
   render() {
-    const { isLoading, images, endOfSearch } = this.state;
+    const { isLoading, images, endOfSearch, largeImg } = this.state;
 
     return (
-      <>
+      <div className={css.app}>
         <Searchbar onSubmit={this.onSearch} />
-        <ImageGallery images={images} />
+        <ImageGallery images={images} onClick={this.getLargeImg} />
+        {isLoading && (
+          <div
+            style={{
+              margin: '0 auto',
+            }}
+          >
+            <Loader />
+          </div>
+        )}
         {images.length > 0 && !endOfSearch && (
           <Button loadMore={this.fetchData} />
         )}
-        {isLoading && <Loader />}
-      </>
+
+        {largeImg && (
+          <Modal onClick={this.toggleModal} imgSrc={largeImg}></Modal>
+        )}
+      </div>
     );
   }
 }

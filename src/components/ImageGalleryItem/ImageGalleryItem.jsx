@@ -1,11 +1,16 @@
 import css from '../ImageGalleryItem/ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ images }) => {
+const ImageGalleryItem = ({ images, onClick }) => {
   return (
     <>
-      {images.map(image => (
-        <li className={css.item} key={image.id}>
-          <img src={image.webformatURL} alt="" className={css.imgItem} />
+      {images.map(({ webformatURL, id, largeImageURL, tags }) => (
+        <li className={css.item} key={id}>
+          <img
+            src={webformatURL}
+            alt={tags}
+            className={css.imgItem}
+            onClick={() => onClick(largeImageURL)}
+          />
         </li>
       ))}
     </>
