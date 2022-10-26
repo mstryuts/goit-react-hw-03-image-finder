@@ -21,7 +21,7 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { searchImgValue, page } = this.state;
+    const { searchImgValue } = this.state;
 
     if (prevState.searchImgValue !== searchImgValue) {
       this.fetchData();
