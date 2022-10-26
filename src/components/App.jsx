@@ -76,11 +76,12 @@ class App extends Component {
   };
 
   render() {
-    const { isLoading, images, endOfSearch, largeImg } = this.state;
+    const { isLoading, images, endOfSearch, largeImg, error } = this.state;
 
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.onSearch} />
+        {error && <p>{error}</p>}
         <ImageGallery images={images} onClick={this.getLargeImg} />
         {isLoading && (
           <div

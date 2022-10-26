@@ -1,4 +1,5 @@
 import css from '../ImageGalleryItem/ImageGalleryItem.module.css';
+import PropTypes from 'prop-types';
 
 const ImageGalleryItem = ({ images, onClick }) => {
   return (
@@ -18,3 +19,8 @@ const ImageGalleryItem = ({ images, onClick }) => {
 };
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object),
+  onClick: PropTypes.func.isRequired,
+};
